@@ -3,7 +3,7 @@
     padding: 0;
 }
 
-h1{
+.gameHeading{
     margin-top: 40px;
     font-size: 80px;
     color: #eb5e28;
@@ -52,17 +52,30 @@ body{
     border-radius: 1rem;
 }
 
-p{
-    color: #d62828;
+.newGame{
+    padding: 1rem;
+    font-size: 1.25rem;
+    background-color: #191913;
+    color: #2ec4b6;
+    border-radius: 1rem;
+}
+
+.winMsg{
+    color: #219ebc;
     font-size: 50px;
+    margin-top: 125px;
+    margin-bottom: 100px;
+}
+
+.hide{
+    display: none;
 }
 
 .msgContainer{
-    visibility: hidden;
-    /* height: 100vmin;
-    display: flex;
+    height: 80vmin;
+    /* display: flex; */
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    gap: 4rem; */
+    gap: 10rem;
 }
