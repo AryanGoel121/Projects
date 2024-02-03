@@ -15,13 +15,13 @@ const genCompChoice = () => {
 const showWinner = (userWin, userChoice, computerChoice) =>{
     if(userWin){
         msg.innerText = `You Won! ${userChoice} beats ${computerChoice}`;
-        console.log(`You Won! ${userChoice} beats ${computerChoice}`);
+        // console.log(`You Won! ${userChoice} beats ${computerChoice}`);
         msg.style.backgroundColor = "#1b263b"; 
         userScore++;
     }
     else{
         msg.innerText = `Computer Won! ${computerChoice} beats your ${userChoice}`;
-        console.log(`Computer Won! ${computerChoice} beats your ${userChoice}`);
+        // console.log(`Computer Won! ${computerChoice} beats your ${userChoice}`);
         msg.style.backgroundColor = "#d90429"; 
         computerScore++;
     }
@@ -30,16 +30,16 @@ const showWinner = (userWin, userChoice, computerChoice) =>{
 }
 
 const playGame = (userChoice) =>{
-    console.log("User choice = ", userChoice);
+    // console.log("User choice = ", userChoice);
 
     // Generate random computer choice -> modular
-    let computerChoice = genCompChoice();
-    console.log("Computer choice = ", computerChoice);
+    const computerChoice = genCompChoice();
+    // console.log("Computer choice = ", computerChoice);
 
     // Logic Board
     if(userChoice === computerChoice){
         msg.innerText = "Game was Draw";
-        console.log("Game was Draw"); 
+        // console.log("Game was Draw"); 
         msg.style.backgroundColor = "#403d39"; 
     }
     else{
