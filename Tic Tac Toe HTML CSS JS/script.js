@@ -100,5 +100,6 @@ resetBtn.addEventListener("click", () => {
 newGame.addEventListener("click", ()=>{
     enableBoxes();
     clickCount = 0;
+    winner = false;
     msgContainer.classList.add("hide");
 })
