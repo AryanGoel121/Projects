@@ -6,7 +6,7 @@
 .gameHeading{
     margin-top: 40px;
     font-size: 80px;
-    color: #eb5e28;
+    color: #fe7f2d;
 }
 
 body{
@@ -41,13 +41,13 @@ body{
     border: none;
     box-shadow: 0 0 1rem rgba(0, 0, 0, 0.3);
     color: #16425b;
-    background-color: #f79d65;
+    background-color: #d0f4de;
 }
 
 .reset{
     padding: 1rem;
     font-size: 1.25rem;
-    background-color: #191913;
+    background-color: #04151f;
     color: #2ec4b6;
     border-radius: 1rem;
 }

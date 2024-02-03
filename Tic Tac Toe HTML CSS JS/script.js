@@ -5,6 +5,7 @@ console.log("Turn of O");
 let resetBtn = document.querySelector(".reset");
 let newGame = document.querySelector(".newGame");
 let msgContainer = document.querySelector(".msgContainer");
+let winner = false;
 
 // Winning Patterns
 let winPatterns = [
@@ -33,21 +34,27 @@ let enableBoxes = () => {
     })
 }
 
+let clickCount = 0;
 // Main Logic for Input
 boxes.forEach((box) => {
     box.addEventListener("click", () => {
         if(turnO){
             box.innerText = "O";
+            box.style.color = "#e71d36";
             turnO = false;
             console.log("Turn of X");
+            clickCount++;
         }
         else{
             box.innerText = "X";
+            box.style.color = "#136f63";
             turnO = true;
             console.log("Turn of O");
+            clickCount++;
         }
         box.disabled = true;
         checkWinner();
+        
     })
 })
 
@@ -64,9 +71,14 @@ let checkWinner = () => {
                 let winText = pos1Val + " is the Winner!";
                 displayWinner(winText);
                 console.log("Winner " + winText);
+                winner = true;
             }
         }
-        
+    }
+    if(clickCount === 9 && !winner){
+        let drawText = "The Game is a Draw";
+        displayWinner(drawText);
+        console.log("The Game is a Draw");
     }
 }
 
@@ -80,11 +92,13 @@ let displayWinner = (winText) => {
 // Reset the game
 resetBtn.addEventListener("click", () => {
     enableBoxes();
+    clickCount = 0;
 })
 
 
 // Start a New Game
 newGame.addEventListener("click", ()=>{
     enableBoxes();
+    clickCount = 0;
     msgContainer.classList.add("hide");
 })
