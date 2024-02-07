@@ -1,37 +1,43 @@
 // Jai Shree Ram
 let plusSign = document.querySelector("#plus");
 let inputText = document.querySelector(".inputText");
-let allItems = document.querySelectorAll(".Text");
-let item = document.querySelector(".Text1");
+let itemsContainer = document.querySelector(".tasks");
+let introMsg = document.querySelector(".intro");
+// let allItems = document.querySelectorAll(".items");
 
 
-// Function To Capture Text
+// Function To Capture & Update Text in the List
 let arrTasks = []; // All the tasks will be stored here;
+let arrResult = []; // All the HTML items will be stored here;
 
 function taskCreated(){
-    let task = inputText.value;
-    inputText.value = "";
-    console.log(task);
-    arrTasks.push(task);
+    if(inputText.value !== ""){
+        let task = inputText.value;
+        inputText.value = "";
+        arrTasks.push(task);
+        introMsg.style.visibility = "hidden";
+        arrResult.push(`<p class="items">${task}</p>`);
+        let tempResult = `<p class="items">${task}</p>`;
+        updateTasks(tempResult);
+    }
 }
 
 plusSign.addEventListener("click", () => {
-    console.log("Plus sign is clicked");
     taskCreated();
 });
 
 inputText.addEventListener("keydown", (evt) => {
     if(evt.key === "Enter"){
-        console.log("Enter was pressed");
         taskCreated();
     }
 });
 
-//------------------------------
-function updateTasks(){
-    arrTasks.forEach((task)=>{
-        item.innerText = task;
-    });
+// Update function to update the list of tasks
+function updateTasks(tempResult){
+    itemsContainer.innerHTML += tempResult;
+    
 }
+
+
 
 
