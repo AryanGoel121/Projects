@@ -79,10 +79,10 @@ body{
 }
 
 .items{
-    /* display: flex; */
-    /* justify-content: start; */
-    /* align-items: center;
-    flex-direction: row; */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
     padding: 0.5rem;
     font-size: 1.3rem;
     background-color:rgba(239, 246, 224, 0.5);
@@ -97,6 +97,9 @@ body{
     background-color:rgba(239, 246, 224, 0.8);
 }
 
+.checkMark:hover{
+    cursor: pointer;
+}
 
 .addTask{
     display: flex;
@@ -131,4 +134,18 @@ body{
 }
 #plus:hover{
     cursor: pointer;
+}
+
+
+ul{
+    list-style-type: none;
+}
+
+p{
+    display: flex;
+    justify-content: space-between;
+}
+
+.checkMark{
+    float: right;
 }
