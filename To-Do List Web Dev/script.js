@@ -17,9 +17,6 @@ function taskCreated(){
         arrTasks.push(task);
 
         pushIntoItems(task);
-        // arrResult.push(`<p class="items">${task}</p>`);
-        // let tempResult = `<p class="items">${task}</p>`;
-        // updateTasks(tempResult);
     }
 }
 
@@ -32,6 +29,10 @@ function pushIntoItems(task){
     itemPara.innerText = task;
     let itemCheckMark = document.createElement('i');
     itemCheckMark.classList.add("fa-solid", "fa-check", "checkMark");
+    itemCheckMark.addEventListener('click',()=>{
+        markAsComplete(itemCheckMark);
+        emptyList();
+    })
 
     divChildren.append(itemPara, itemCheckMark);
     itemDiv.appendChild(divChildren);
@@ -39,7 +40,8 @@ function pushIntoItems(task){
     let itemsContainer = document.querySelector(".tasks");
     itemsContainer.appendChild(itemDiv);
 
-    markAsComplete();
+    
+
 }
 
 plusSign.addEventListener("click", () => {
@@ -52,44 +54,16 @@ inputText.addEventListener("keydown", (evt) => {
     }
 });
 
-// // Update function to update the list of tasks
-// function updateTasks(tempResult){
-//     itemsContainer.innerHTML += tempResult;
-    
-// }
-
-// // Mark as Complete on hover
-// let allItems = document.querySelectorAll(".items");
-// allItems.forEach((item)=>{
-//     item.addEventListener("click", ()=>{
-//         if(!item.contains(checkMark)){
-//             let checkMark = document.createElement("i");
-//             checkMark.classList.add("fa-solid", "fa-check");
-//             item.appendChild(checkMark);
-//             // console.log("Mouse has entered");
-//         }
-//     })
-// });
-
-// allItems.forEach((item)=>{
-//     item.addEventListener("mouseleave", ()=>{
-//         if(item.contains(checkMark)){
-//             item.removeChild(checkMark);  
-//         }
-//     })
-// });
-
 // Mark as Complete
+function markAsComplete(itemCheckMark){
+    let audio = document.querySelector("#myAudio");
+    audio.play();
+    itemCheckMark.parentElement.remove();
+}
 
-function markAsComplete(){
-    let allItems = document.querySelectorAll(".items");
-    allItems.forEach((item)=>{
-        
-    })
-    let checkMark = document.querySelectorAll(".checkMark");
-    checkMark.forEach((check)=>{
-        check.addEventListener("click", ()=>{
-            console.log("Check is pressed");
-        })
-    })
+function emptyList(){
+    let div = document.querySelector(".tasks");
+    if(div.innerText.trim() === ''){
+        introMsg.style.visibility = "visible";
+    }
 }

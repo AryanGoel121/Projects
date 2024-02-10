@@ -41,6 +41,10 @@ body{
     height: 80%;
 }
 
+.strikedText{
+    text-decoration: line-through;
+}
+
 .frame1{
     display: flex;
     justify-content: start;
