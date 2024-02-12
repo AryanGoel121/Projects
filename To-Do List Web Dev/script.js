@@ -8,7 +8,20 @@ let introMsg = document.querySelector(".intro");
 // Function To Capture & Update Text in the List
 let arrTasks = []; // All the tasks will be stored here;
 let arrResult = []; // All the HTML items will be stored here;
+let allTasks = [];
 
+// Input Methods
+plusSign.addEventListener("click", () => {
+    taskCreated();
+});
+
+inputText.addEventListener("keydown", (evt) => {
+    if(evt.key === "Enter"){
+        taskCreated();
+    }
+});
+
+// Creating the task
 function taskCreated(){
     if(inputText.value !== ""){
         introMsg.style.visibility = "hidden";
@@ -20,47 +33,64 @@ function taskCreated(){
     }
 }
 
+// Making HTML and printing the tasks
 function pushIntoItems(task){
-    const itemDiv = document.createElement('div');
-    itemDiv.classList.add("items");
-    const divChildren = document.createDocumentFragment();
+    // When task is created we want to put it in a div which containers everthing
+    const fullTask = document.createDocumentFragment();
 
-    let itemPara = document.createElement('p');
-    itemPara.innerText = task;
-    let itemCheckMark = document.createElement('i');
-    itemCheckMark.classList.add("fa-solid", "fa-check", "checkMark");
-    itemCheckMark.addEventListener('click',()=>{
-        markAsComplete(itemCheckMark);
+    const divElement = document.createElement('div');
+    divElement.classList.add('items');
+
+    const paraChildElement = document.createElement('p');
+    paraChildElement.innerText = task;
+
+    let checkChildElement = document.createElement('i');
+    checkChildElement.classList.add("fa-solid", "fa-check", "checkMark");
+    checkChildElement.addEventListener('click',()=>{
+        markAsComplete(checkChildElement);
         emptyList();
     })
 
-    divChildren.append(itemPara, itemCheckMark);
-    itemDiv.appendChild(divChildren);
+    divElement.append(paraChildElement, checkChildElement);
 
-    let itemsContainer = document.querySelector(".tasks");
-    itemsContainer.appendChild(itemDiv);
+    console.log(divElement);
 
-    
+    allTasks.push(divElement);
+    displayTasks(allTasks);
 
+    // let itemsContainer = document.querySelector(".tasks");
+    // itemsContainer.appendChild(fullTask);
 }
 
-plusSign.addEventListener("click", () => {
-    taskCreated();
-});
-
-inputText.addEventListener("keydown", (evt) => {
-    if(evt.key === "Enter"){
-        taskCreated();
-    }
-});
+// Displaying all the Tasks
+function displayTasks(allTasks){
+    allTasks.forEach((task) => {
+        let tasksContainer = document.querySelector(".tasks");
+        tasksContainer.appendChild(task);
+    });
+}
 
 // Mark as Complete
-function markAsComplete(itemCheckMark){
-    let audio = document.querySelector("#myAudio");
-    audio.play();
-    itemCheckMark.parentElement.remove();
+function markAsComplete(checkChildElement){
+    // let audio = document.querySelector("#myAudio");
+    // audio.play();
+    // checkChildElement.parentElement.remove();
+
+    allTasks.forEach((task) => {
+        let taskContent = task.querySelector("p").innerText;
+        let toBeDeletedContent = checkChildElement.previousElementSibling.innerText;
+        console.log(toBeDeletedContent);
+        if(taskContent == toBeDeletedContent){
+            const indexDelete = allTasks.indexOf(task);
+            // task.remove();
+            const deleted = allTasks.splice(indexDelete, 1);
+            console.log(deleted);
+            displayTasks(allTasks);
+        }
+    });
 }
 
+// Check for Empty
 function emptyList(){
     let div = document.querySelector(".tasks");
     if(div.innerText.trim() === ''){
