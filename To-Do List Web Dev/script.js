@@ -6,9 +6,8 @@ let introMsg = document.querySelector(".intro");
 
 
 // Function To Capture & Update Text in the List
-let arrTasks = []; // All the tasks will be stored here;
-let arrResult = []; // All the HTML items will be stored here;
-let allTasks = [];
+let arrTasks = []; // All the tasks and the HISTORY will be stored here;
+let allTasks = []; // All the HTML items will be stored here;
 
 // Input Methods
 plusSign.addEventListener("click", () => {
@@ -35,9 +34,7 @@ function taskCreated(){
 
 // Making HTML and printing the tasks
 function pushIntoItems(task){
-    // When task is created we want to put it in a div which containers everthing
-    const fullTask = document.createDocumentFragment();
-
+    // Making a div to store everything;
     const divElement = document.createElement('div');
     divElement.classList.add('items');
 
@@ -57,36 +54,42 @@ function pushIntoItems(task){
 
     allTasks.push(divElement);
     displayTasks(allTasks);
-
-    // let itemsContainer = document.querySelector(".tasks");
-    // itemsContainer.appendChild(fullTask);
 }
 
 // Displaying all the Tasks
 function displayTasks(allTasks){
     allTasks.forEach((task) => {
-        let tasksContainer = document.querySelector(".tasks");
-        tasksContainer.appendChild(task);
+        itemsContainer.appendChild(task);
     });
 }
 
 // Mark as Complete
 function markAsComplete(checkChildElement){
-    // let audio = document.querySelector("#myAudio");
-    // audio.play();
-    // checkChildElement.parentElement.remove();
+    let audio = document.querySelector("#myAudio"); // Little Fun!!!
+    audio.play();
 
     allTasks.forEach((task) => {
         let taskContent = task.querySelector("p").innerText;
         let toBeDeletedContent = checkChildElement.previousElementSibling.innerText;
-        console.log(toBeDeletedContent);
+
         if(taskContent == toBeDeletedContent){
             const indexDelete = allTasks.indexOf(task);
-            // task.remove();
+
             const deleted = allTasks.splice(indexDelete, 1);
             console.log(deleted);
+
+            // Delete all the pre-existing items and print the available ones;
+            deleteAllItems();
             displayTasks(allTasks);
         }
+    });
+}
+
+// Delete all items first to print a fresh list of tasks;
+function deleteAllItems(){
+    const deleteAll = document.querySelectorAll(".items");
+    deleteAll.forEach((item)=>{
+        item.remove();
     });
 }
 
