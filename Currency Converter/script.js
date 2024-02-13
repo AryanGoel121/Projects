@@ -1,4 +1,4 @@
-const BASE_URL = "https://v6.exchangerate-api.com/v6/987e15339ef602611e4af16c/latest/";
+const BASE_URL = "https://api.exchangerate-api.com/v4/latest/";
 
 const dropdowns = document.querySelectorAll(".dropdown select");
 const btn = document.querySelector("form button");
@@ -43,9 +43,14 @@ btn.addEventListener("click", async (evt) => {
     console.log(fromCurr.value, toCurr.value);
     const URL = `${BASE_URL}/${fromCurr.value}`;
     let response = await fetch(URL);
-    let data = await response.json();
-    console.log(data);
-    let msg = document.querySelector(".msg");
-    msg.innerText = `${fromCurr.value} = ${toCurr.value}`;
+    let rawData = await response.json();
+    const rates = rawData['rates'];
 
+    const inputValue = document.querySelector("input").value;
+    const converted_amount = inputValue * rates[toCurr.value];
+
+
+    let msg = document.querySelector(".msg");
+    msg.innerText = `${inputValue} ${fromCurr.value} = ${converted_amount} ${toCurr.value}`;
+    
 })
